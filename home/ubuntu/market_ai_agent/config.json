@@ -1,0 +1,80 @@
+"""
+Configuration file for Market AI Agent
+
+This file contains the configuration settings for the Market AI Agent.
+"""
+
+{
+    "data_dir": "data",
+    "reports_dir": "reports",
+    "use_mock_data": true,
+    "modules": {
+        "news_sentiment": {
+            "enabled": true,
+            "max_articles_per_source": 10,
+            "sources": {
+                "cnbc": "https://www.cnbc.com/finance/",
+                "bloomberg": "https://www.bloomberg.com/markets",
+                "coindesk": "https://www.coindesk.com/",
+                "wsj": "https://www.wsj.com/news/markets"
+            },
+            "watchlist": {
+                "stocks": ["AAPL", "MSFT", "GOOGL", "AMZN", "META", "TSLA", "NVDA"],
+                "crypto": ["BTC", "ETH", "SOL", "XRP", "ADA", "DOGE", "AVAX"],
+                "sectors": ["Technology", "Finance", "Energy", "Healthcare", "Consumer"]
+            }
+        },
+        "macro_sentiment": {
+            "enabled": true,
+            "indicators": {
+                "vix": {
+                    "threshold_low": 15,
+                    "threshold_high": 25
+                },
+                "economic_data": {
+                    "fred_api_key": "YOUR_FRED_API_KEY"
+                }
+            }
+        },
+        "cme_volume": {
+            "enabled": true,
+            "contracts": ["ES", "NQ", "YM"],
+            "thresholds": {
+                "volume_spike": 1.5,
+                "oi_change": 0.1,
+                "alert_period": 7
+            }
+        },
+        "sentiment_crosscheck": {
+            "enabled": true,
+            "sources": {
+                "reddit": {
+                    "subreddits": ["wallstreetbets", "investing", "stocks", "options"],
+                    "timeframe": "day",
+                    "limit": 100
+                },
+                "twitter": {
+                    "search_terms": ["stocks", "investing", "trading", "market", "SPY", "QQQ", "FOMC"],
+                    "influencers": ["jimcramer", "elonmusk", "chamath", "carlicahn", "elerianm"],
+                    "limit": 100
+                }
+            }
+        },
+        "report_generator": {
+            "enabled": true,
+            "format": "html",
+            "include_charts": true,
+            "email": {
+                "enabled": false,
+                "smtp_server": "smtp.gmail.com",
+                "smtp_port": 587,
+                "sender_email": "your_email@gmail.com",
+                "sender_password": "your_app_password",
+                "recipient_email": "recipient@example.com",
+                "subject": "Daily Market Intelligence Report - {date}",
+                "delivery_time": "07:00",
+                "time_zone": "America/New_York"
+            }
+        }
+    }
+}
